@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMRON MEDIA</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Montserrat:wght@300;400;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #F0C84A;
+    --cyan: #00D4FF;
+    --dark: #050505;
+    --dark2: #0A0A0A;
+    --card-bg: rgba(255,255,255,0.04);
+    --border: rgba(201,168,76,0.2);
+    --text: #e8e8e8;
+    --text-muted: #888;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px;
+    background: rgba(5,5,5,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900; font-size: 20px; letter-spacing: 3px;
+    color: var(--gold);
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: var(--text-muted); text-decoration: none;
+    font-size: 13px; letter-spacing: 1px; font-weight: 600;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold);
+    color: #000; font-weight: 700; font-size: 12px;
+    padding: 10px 24px; border: none; cursor: pointer;
+    letter-spacing: 1px; transition: all 0.3s;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: scale(1.05); }
+
+  /* HERO */
+  .hero {
+    height: 100vh; position: relative;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    background: radial-gradient(ellipse at center, #0d0d0d 0%, #000 100%);
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; transform: translate(-50%,-50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%,-50%) scale(1.1); }
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-eyebrow {
+    display: inline-block;
+    border: 1px solid var(--border);
+    padding: 6px 20px; margin-bottom: 32px;
+    font-size: 11px; letter-spacing: 4px; color: var(--gold);
+    font-family: 'Montserrat', sans-serif; font-weight: 600;
+  }
+  .hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 80px; font-weight: 900; line-height: 1;
+    letter-spacing: -2px; color: #fff; margin-bottom: 8px;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 80px; font-weight: 900; line-height: 1;
+    letter-spacing: -2px; color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.15);
+    margin-bottom: 32px;
+  }
+  .hero-desc {
+    font-size: 15px; color: var(--text-muted);
+    max-width: 420px; margin: 0 auto 48px; line-height: 1.8;
+  }
+  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: #000;
+    font-weight: 700; font-size: 13px; letter-spacing: 2px;
+    padding: 16px 36px; border: none; cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    font-weight: 600; font-size: 13px; letter-spacing: 2px;
+    padding: 16px 36px;
+    border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* STATS */
+  .stats {
+    padding: 80px 60px;
+    background: var(--dark2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    text-align: center; gap: 20px;
+  }
+  .stat-item { padding: 20px; }
+  .stat-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px; font-weight: 900; color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 8px; letter-spacing: 1px; }
+
+  /* SECTION */
+  section { padding: 100px 60px; }
+  .section-tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px; letter-spacing: 5px; color: var(--gold);
+    font-weight: 700; margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px; font-weight: 900; color: #fff; line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .section-title span { color: var(--gold); }
+  .section-desc { color: var(--text-muted); line-height: 1.9; max-width: 580px; font-size: 15px; }
+
+  /* ABOUT */
+  .about { background: var(--dark); }
+  .about-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .about-quote {
+    font-size: 28px; font-weight: 700; color: #fff; line-height: 1.6;
+    margin-bottom: 28px;
+  }
+  .about-quote em { color: var(--gold); font-style: normal; }
+  .about-cards { display: flex; flex-direction: column; gap: 16px; }
+  .about-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    border-right: 3px solid var(--gold);
+  }
+  .about-card h4 { color: var(--gold); font-size: 14px; letter-spacing: 2px; margin-bottom: 8px; }
+  .about-card p { color: var(--text-muted); font-size: 13px; line-height: 1.7; }
+
+  /* SERVICES */
+  .services { background: var(--dark2); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 60px;
+  }
+  .service-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 32px 24px;
+    position: relative; overflow: hidden;
+    transition: all 0.4s; cursor: default;
+  }
+  .service-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--cyan));
+    transform: scaleX(0); transition: transform 0.4s;
+    transform-origin: right;
+  }
+  .service-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .service-card:hover::before { transform: scaleX(1); transform-origin: left; }
+  .service-icon { font-size: 28px; margin-bottom: 16px; }
+  .service-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px; font-weight: 700; color: #fff;
+    margin-bottom: 10px; letter-spacing: 1px;
+  }
+  .service-card p { color: var(--text-muted); font-size: 12px; line-height: 1.7; }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .service-tag {
+    font-size: 10px; color: var(--gold); border: 1px solid var(--border);
+    padding: 2px 8px; letter-spacing: 1px;
+  }
+
+  /* WORKFLOW */
+  .workflow { background: var(--dark); text-align: center; }
+  .workflow-steps {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0; margin-top: 60px; flex-wrap: wrap;
+  }
+  .workflow-step { text-align: center; padding: 20px 30px; }
+  .step-num {
+    width: 56px; height: 56px; border: 1px solid var(--gold);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 14px;
+    color: var(--gold); margin: 0 auto 14px;
+    background: rgba(201,168,76,0.05);
+  }
+  .step-label { font-size: 13px; font-weight: 600; color: #fff; }
+  .step-arrow { color: var(--gold); font-size: 20px; opacity: 0.4; padding: 0 4px; }
+
+  /* PORTFOLIO */
+  .portfolio { background: var(--dark2); }
+  .portfolio-filters { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+  .filter-btn {
+    padding: 8px 20px; background: transparent;
+    border: 1px solid var(--border); color: var(--text-muted);
+    font-size: 11px; letter-spacing: 2px; cursor: pointer; transition: all 0.3s;
+    font-family: 'Cairo', sans-serif;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--gold); color: #000; border-color: var(--gold); font-weight: 700;
+  }
+  .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .portfolio-item {
+    position: relative; overflow: hidden; aspect-ratio: 4/3;
+    background: var(--card-bg); border: 1px solid var(--border); cursor: pointer;
+  }
+  .portfolio-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  }
+  .portfolio-emoji { font-size: 36px; }
+  .portfolio-cat {
+    font-size: 10px; letter-spacing: 3px; color: var(--gold);
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+  }
+  .portfolio-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+  .portfolio-overlay h3 { color: #fff; font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .portfolio-overlay span { color: var(--gold); font-size: 11px; letter-spacing: 2px; }
+
+  /* PRODUCTION */
+  .production { background: var(--dark); }
+  .production-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 60px;
+  }
+  .prod-card {
+    border: 1px solid var(--border); padding: 40px 28px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(201,168,76,0.03), transparent);
+    transition: all 0.3s;
+  }
+  .prod-card:hover { border-color: var(--gold); }
+  .prod-card .icon { font-size: 40px; margin-bottom: 20px; }
+  .prod-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 12px;
+  }
+  .prod-card p { color: var(--text-muted); font-size: 13px; line-height: 1.7; }
+
+  /* FAQ */
+  .faq { background: var(--dark2); }
+  .faq-list { margin-top: 50px; max-width: 760px; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 24px 0; }
+  .faq-q {
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; font-weight: 600; font-size: 15px; color: #fff;
+  }
+  .faq-q:hover { color: var(--gold); }
+  .faq-a { color: var(--text-muted); font-size: 13px; line-height: 1.8; margin-top: 14px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .faq-icon { color: var(--gold); font-size: 20px; font-weight: 300; transition: transform 0.3s; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+  /* CTA */
+  .cta-section {
+    background: var(--dark); padding: 120px 60px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 65%);
+  }
+  .cta-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 60px; font-weight: 900; color: #fff;
+    line-height: 1.1; margin-bottom: 20px; position: relative;
+  }
+  .cta-section h2 span { color: var(--gold); }
+  .cta-section p { color: var(--text-muted); font-size: 15px; margin-bottom: 48px; position: relative; }
+
+  /* CONTACT */
+  .contact { background: var(--dark2); }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+  .contact-item {
+    display: flex; align-items: center; gap: 20px;
+    padding: 24px 0; border-bottom: 1px solid var(--border);
+  }
+  .contact-icon { font-size: 20px; }
+  .contact-info h4 { color: var(--gold); font-size: 11px; letter-spacing: 2px; margin-bottom: 4px; }
+  .contact-info p { color: var(--text); font-size: 14px; }
+  .contact-form { display: flex; flex-direction: column; gap: 14px; }
+  .contact-form input, .contact-form textarea {
+    background: var(--card-bg); border: 1px solid var(--border);
+    color: var(--text); padding: 14px 18px; font-family: 'Cairo', sans-serif;
+    font-size: 13px; outline: none; transition: border-color 0.3s; resize: none;
+  }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--gold); }
+  .contact-form textarea { height: 120px; }
+  .contact-form ::placeholder { color: var(--text-muted); }
+
+  /* CLIENTS */
+  .clients { background: var(--dark); padding: 60px; }
+  .clients-row {
+    display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; opacity: 0.4;
+  }
+  .client-logo {
+    background: var(--card-bg); border: 1px solid var(--border);
+    width: 100px; height: 50px; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: var(--text-muted); letter-spacing: 2px;
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #000; border-top: 1px solid var(--border);
+    padding: 48px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900; font-size: 18px; color: var(--gold); letter-spacing: 3px;
+  }
+  .footer-tagline { font-size: 11px; color: var(--text-muted); margin-top: 4px; letter-spacing: 2px; }
+  .footer-links { display: flex; gap: 32px; }
+  .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 12px; letter-spacing: 1px; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { font-size: 11px; color: var(--text-muted); }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AMRON MEDIA</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#production">Production</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta">START PROJECT</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">CREATIVE MARKETING AGENCY</div>
+    <h1 class="hero-title">WE BUILD<br><span>BRANDS.</span></h1>
+    <div class="hero-sub">WE CREATE IMPACT.</div>
+    <p class="hero-desc">وكالة إبداعية متكاملة تحوّل أفكارك إلى علامة تجارية تترك أثراً حقيقياً في السوق</p>
+    <div class="hero-btns">
+      <button class="btn-primary">START YOUR PROJECT</button>
+      <button class="btn-outline">VIEW PORTFOLIO</button>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item"><div class="stat-num">+120</div><div class="stat-label">مشروع</div></div>
+  <div class="stat-item"><div class="stat-num">35</div><div class="stat-label">براند</div></div>
+  <div class="stat-item"><div class="stat-num">500</div><div class="stat-label">تصميم</div></div>
+  <div class="stat-item"><div class="stat-num">20</div><div class="stat-label">حملة إعلانية</div></div>
+  <div class="stat-item"><div class="stat-num">10M+</div><div class="stat-label">Reach</div></div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div>
+      <div class="section-tag">WHO WE ARE</div>
+      <div class="about-quote">نحن لا ندير صفحات...<br><em>نحن نبني علامات تجارية.</em></div>
+      <p class="section-desc">في عالم مليء بالمحتوى، الفرق الحقيقي ليس في عدد المنشورات، بل في الأثر الذي تتركه علامتك التجارية. وكالة متخصصة في التسويق والإنتاج الإبداعي، تقدم حلولاً متكاملة تساعد الشركات على النمو وبناء هوية قوية.</p>
+      <br>
+      <p style="color: var(--gold); font-size: 14px; font-weight: 700;">لسنا مجرد منفذين... بل شركاء نجاح.</p>
+    </div>
+    <div class="about-cards">
+      <div class="about-card">
+        <h4>رؤيتنا</h4>
+        <p>أن نصبح واحدة من أكثر الوكالات الإبداعية تأثيراً في الوطن العربي، من خلال تقديم حلول تسويقية حديثة تجمع بين الإبداع، البيانات، والتكنولوجيا.</p>
+      </div>
+      <div class="about-card">
+        <h4>رسالتنا</h4>
+        <p>تحويل الأفكار إلى علامات تجارية قوية، وصناعة محتوى يترك أثراً ويحقق نتائج قابلة للقياس.</p>
+      </div>
+      <div class="about-card">
+        <h4>لماذا AMRON؟</h4>
+        <p>لأننا نجمع بين الإبداع والاستراتيجية والإنتاج في مكان واحد، مع فريق متخصص يفهم السوق المصري والعربي.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-tag">WHAT WE DO</div>
+  <h2 class="section-title">خدماتنا <span>المتكاملة</span></h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">◈</div>
+      <h3>BRAND IDENTITY</h3>
+      <p>نبني هوية بصرية متكاملة تعكس روح علامتك التجارية</p>
+      <div class="service-tags"><span class="service-tag">Logo</span><span class="service-tag">Colors</span><span class="service-tag">Typography</span><span class="service-tag">Guidelines</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">◉</div>
+      <h3>SOCIAL MEDIA</h3>
+      <p>استراتيجية محتوى وإدارة احترافية لحضور قوي على المنصات</p>
+      <div class="service-tags"><span class="service-tag">Strategy</span><span class="service-tag">Content</span><span class="service-tag">Analytics</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">▲</div>
+      <h3>PERFORMANCE ADS</h3>
+      <p>حملات إعلانية مدفوعة تحقق نتائج حقيقية وعائد قابل للقياس</p>
+      <div class="service-tags"><span class="service-tag">Facebook</span><span class="service-tag">Google</span><span class="service-tag">Leads</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⬡</div>
+      <h3>CREATIVE DESIGN</h3>
+      <p>تصاميم إبداعية لكل منصة ومناسبة تجذب الانتباه وتحرك القرار</p>
+      <div class="service-tags"><span class="service-tag">Social</span><span class="service-tag">Print</span><span class="service-tag">Outdoor</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">▶</div>
+      <h3>VIDEO PRODUCTION</h3>
+      <p>إنتاج فيديو احترافي من الإعلانات التجارية إلى الريلز والموشن</p>
+      <div class="service-tags"><span class="service-tag">Ads</span><span class="service-tag">Reels</span><span class="service-tag">Motion</span><span class="service-tag">Drone</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">◎</div>
+      <h3>PHOTOGRAPHY</h3>
+      <p>تصوير احترافي للمنتجات والمطاعم والشركات وكل ما يحتاج عدسة محترفة</p>
+      <div class="service-tags"><span class="service-tag">Products</span><span class="service-tag">Food</span><span class="service-tag">Corporate</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎙</div>
+      <h3>PODCAST PRODUCTION</h3>
+      <p>استوديو متكامل للبودكاست من التسجيل إلى المونتاج والنشر</p>
+      <div class="service-tags"><span class="service-tag">Studio</span><span class="service-tag">Editing</span><span class="service-tag">Publish</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⬡</div>
+      <h3>WEBSITE DESIGN</h3>
+      <p>مواقع وlanding pages بتصميم عالمي وأداء سريع وجاهزة للـ SEO</p>
+      <div class="service-tags"><span class="service-tag">UI/UX</span><span class="service-tag">E-commerce</span><span class="service-tag">SEO</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKFLOW -->
+<section class="workflow" id="workflow">
+  <div class="section-tag">HOW WE WORK</div>
+  <h2 class="section-title">Workflow</h2>
+  <div class="workflow-steps">
+    <div class="workflow-step"><div class="step-num">01</div><div class="step-label">Discovery</div></div>
+    <div class="step-arrow">→</div>
+    <div class="workflow-step"><div class="step-num">02</div><div class="step-label">Planning</div></div>
+    <div class="step-arrow">→</div>
+    <div class="workflow-step"><div class="step-num">03</div><div class="step-label">Creative</div></div>
+    <div class="step-arrow">→</div>
+    <div class="workflow-step"><div class="step-num">04</div><div class="step-label">Production</div></div>
+    <div class="step-arrow">→</div>
+    <div class="workflow-step"><div class="step-num">05</div><div class="step-label">Launch</div></div>
+    <div class="step-arrow">→</div>
+    <div class="workflow-step"><div class="step-num">06</div><div class="step-label">Optimization</div></div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="section-tag">OUR WORK</div>
+  <h2 class="section-title">Portfolio</h2>
+  <div class="portfolio-filters">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Restaurants</button>
+    <button class="filter-btn">Real Estate</button>
+    <button class="filter-btn">Medical</button>
+    <button class="filter-btn">Identity</button>
+    <button class="filter-btn">Video</button>
+    <button class="filter-btn">Podcast</button>
+    <button class="filter-btn">Photography</button>
+  </div>
+  <div class="portfolio-grid">
+    <div class="portfolio-item" style="background:linear-gradient(135deg,#1a0a00,#0d0500)">
+      <div class="portfolio-placeholder"><div class="portfolio-emoji">🍽️</div><div class="portfolio-cat">RESTAURANT</div></div>
+      <div class="portfolio-overlay"><h3>Brand Identity & Social</h3><span>RESTAURANT</span></div>
+    </div>
+    <div class="portfolio-item" style="background:linear-gradient(135deg,#00100a,#000d08)">
+      <div class="portfolio-placeholder"><div class="portfolio-emoji">🏢</div><div class="portfolio-cat">REAL ESTATE</div></div>
+      <div class="portfolio-overlay"><h3>Corporate Identity</h3><span>REAL ESTATE</span></div>
+    </div>
+    <div class="portfolio-item" style="background:linear-gradient(135deg,#0a0010,#050007)">
+      <div class="portfolio-placeholder"><div class="portfolio-emoji">🏥</div><div class="portfolio-cat">MEDICAL</div></div>
+      <div class="portfolio-overlay"><h3>Social Media Campaign</h3><span>MEDICAL</span></div>
+    </div>
+    <div class="portfolio-item" style="background:linear-gradient(135deg,#100800,#0d0600)">
+      <div class="portfolio-placeholder"><div class="portfolio-emoji">🎙️</div><div class="portfolio-cat">PODCAST</div></div>
+      <div class="portfolio-overlay"><h3>Podcast Production</h3><span>PODCAST</span></div>
+    </div>
+    <div class="portfolio-item" style="background:linear-gradient(135deg,#000a10,#00060d)">
+      <div class="portfolio-placeholder"><div class="portfolio-emoji">🛋️</div><div class="portfolio-cat">FURNITURE</div></div>
+      <div class="portfolio-overlay"><h3>Product Photography</h3><span>FURNITURE</span></div>
+    </div>
+    <div class="portfolio-item" style="background:linear-gradient(135deg,#0a0a00,#080800)">
+      <div class="portfolio-placeholder"><div class="portfolio-emoji">✈️</div><div class="portfolio-cat">TOURISM</div></div>
+      <div class="portfolio-overlay"><h3>Performance Marketing</h3><span>TOURISM</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTION -->
+<section class="production" id="production">
+  <div class="section-tag">AMRON MEDIA PRODUCTION</div>
+  <h2 class="section-title">قسم <span>الإنتاج</span></h2>
+  <div class="production-grid">
+    <div class="prod-card"><div class="icon">📷</div><h3>Photography</h3><p>تصوير احترافي للمنتجات والمطاعم والعقارات والأزياء والأفراد</p></div>
+    <div class="prod-card"><div class="icon">🎬</div><h3>Video Production</h3><p>إنتاج فيديو تجاري واحترافي — ريلز، موشن، دراما، وإعلانات</p></div>
+    <div class="prod-card"><div class="icon">🎙️</div><h3>Podcast Studio</h3><p>استوديو متكامل بإضاءة وصوت احترافي، تسجيل ومونتاج ونشر</p></div>
+    <div class="prod-card"><div class="icon">🎪</div><h3>Events Coverage</h3><p>تغطية الفعاليات والمؤتمرات والمناسبات بأعلى مستوى احترافي</p></div>
+    <div class="prod-card"><div class="icon">📺</div><h3>Commercial Ads</h3><p>إعلانات تجارية بجودة سينمائية تليق بعلامتك التجارية</p></div>
+    <div class="prod-card"><div class="icon">🎭</div><h3>Behind The Scenes</h3><p>محتوى كواليس يبني الثقة ويقرّب جمهورك من علامتك التجارية</p></div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<div class="clients">
+  <div style="text-align:center;margin-bottom:40px;">
+    <div class="section-tag" style="text-align:center;">OUR CLIENTS</div>
+  </div>
+  <div class="clients-row">
+    <div class="client-logo">CLIENT</div>
+    <div class="client-logo">CLIENT</div>
+    <div class="client-logo">CLIENT</div>
+    <div class="client-logo">CLIENT</div>
+    <div class="client-logo">CLIENT</div>
+    <div class="client-logo">CLIENT</div>
+    <div class="client-logo">CLIENT</div>
+    <div class="client-logo">CLIENT</div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-tag">FAQ</div>
+  <h2 class="section-title">أسئلة <span>شائعة</span></h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>ليه أختار AMRON MEDIA؟</span><span class="faq-icon">+</span></div>
+      <div class="faq-a">لأننا نقدم حلاً متكاملاً يجمع بين الإبداع والاستراتيجية والإنتاج في مكان واحد. فريقنا متخصص ونتائجنا قابلة للقياس.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>كام مدة التنفيذ؟</span><span class="faq-icon">+</span></div>
+      <div class="faq-a">يختلف حسب نوع المشروع. الهوية البصرية تستغرق 7-14 يوم، وإدارة السوشيال ميديا تبدأ من اليوم الأول، وإنتاج الفيديو يتراوح بين 3-10 أيام.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>هل في باقات جاهزة؟</span><span class="faq-icon">+</span></div>
+      <div class="faq-a">نعم، لدينا باقات مرنة تناسب كل حجم شركة، بالإضافة لإمكانية تخصيص باقة حسب احتياجك بالضبط.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>هل بتشتغلوا خارج مصر؟</span><span class="faq-icon">+</span></div>
+      <div class="faq-a">نعم، نقدم خدماتنا الرقمية لعملاء في الوطن العربي كله، والإنتاج المتنقل متاح بالتنسيق المسبق.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>هل فيه إدارة إعلانات؟</span><span class="faq-icon">+</span></div>
+      <div class="faq-a">بالتأكيد. لدينا فريق متخصص في Performance Marketing على Facebook وInstagram وGoogle مع تقارير شهرية مفصلة.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>هل فيه تصميم هوية؟</span><span class="faq-icon">+</span></div>
+      <div class="faq-a">نعم، Brand Identity هي من أقوى خدماتنا — Logo، Colors، Typography، Brand Guidelines، Packaging، وكل عناصر الهوية البصرية.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>جاهز تبدأ؟<br><span>خلينا نبني براند يليق بطموحك.</span></h2>
+  <p>لا تتردد — خطوتك الأولى نحو علامة تجارية قوية تبدأ من هنا</p>
+  <div style="display:flex;gap:16px;justify-content:center;position:relative;">
+    <button class="btn-primary">📅 BOOK A MEETING</button>
+    <button class="btn-outline">💬 WHATSAPP</button>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-tag">GET IN TOUCH</div>
+  <h2 class="section-title">تواصل <span>معنا</span></h2>
+  <div class="contact-inner">
+    <div>
+      <div class="contact-item"><div class="contact-icon">📞</div><div class="contact-info"><h4>PHONE</h4><p>01015307320</p></div></div>
+      <div class="contact-item"><div class="contact-icon">💬</div><div class="contact-info"><h4>WHATSAPP</h4><p>01015307320</p></div></div>
+      <div class="contact-item"><div class="contact-icon">✉️</div><div class="contact-info"><h4>EMAIL</h4><p>amronmedia31@gmail.com</p></div></div>
+      <div class="contact-item"><div class="contact-icon">📍</div><div class="contact-info"><h4>LOCATION</h4><p>9م — حدائق الأهرام، الجيزة</p></div></div>
+    </div>
+    <div>
+      <form class="contact-form">
+        <input type="text" placeholder="الاسم">
+        <input type="tel" placeholder="رقم الهاتف">
+        <input type="email" placeholder="البريد الإلكتروني">
+        <input type="text" placeholder="نوع الخدمة المطلوبة">
+        <textarea placeholder="رسالتك..."></textarea>
+        <button class="btn-primary" type="submit">SEND MESSAGE →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">AMRON MEDIA</div>
+    <div class="footer-tagline">CREATIVE. STRATEGY. PRODUCTION. MARKETING.</div>
+  </div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-copy">© 2025 AMRON MEDIA. All Rights Reserved.</div>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
